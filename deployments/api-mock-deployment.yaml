@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mock-api
+  labels:
+    app: mock-api
+spec:
+  # deployment spec
+  replicas: 3
+  # how to query pods for this deployment
+  selector: 
+    matchLabels:
+      app: mock-api
+  template:
+    # template of pod being governed by this deployment
+    metadata:
+      labels:
+        app: mock-api
+    spec:
+      containers:
+        - name: mock-api-server 
+          image: api-server-mock:1.0.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 3
