@@ -8,4 +8,4 @@ async def root():
 
 @app.get("/healthz")
 async def root():
-    return {"health": "ok"}
+    return {"health": "GUT"}

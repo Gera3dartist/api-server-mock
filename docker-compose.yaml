@@ -4,5 +4,9 @@ services:
     build: 
       context: .
       target: development
+    volumes: 
+      - type: bind
+        source: ./api_server_mock
+        target: /opt/api_server_mock/api_server_mock
     ports: 
       - "8080:8080"

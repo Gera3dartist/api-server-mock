@@ -4,6 +4,8 @@ metadata:
   name: mock-api
   labels:
     app: mock-api
+  annotations:
+    description: Deployment for mock api service
 spec:
   # deployment spec
   replicas: 3
