@@ -7,5 +7,10 @@ async def root():
 
 
 @app.get("/healthz")
-async def root():
+async def healthz():
+    return {"health": "GUT"}
+
+
+@app.post("/register")
+async def register():
     return {"health": "GUT"}

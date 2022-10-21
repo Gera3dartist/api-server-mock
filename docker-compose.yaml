@@ -10,3 +10,11 @@ services:
         target: /opt/api_server_mock/api_server_mock
     ports: 
       - "8080:8080"
+  db:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_database: mock_api_db
+    ports:
+      - "15432:5432"
