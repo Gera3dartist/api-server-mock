@@ -1,7 +1,12 @@
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import MetaData
 
-DATABASE_URL = "sqlite+aiosqlite:///./test.db"
 
-engine = create_async_engine(DATABASE_URL, future=True, echo=True)
-async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+convention = {
+    "ix": "ix_%(column_0_label)s",
+    "uq": "uq_%(table_name)s_%(column_0_name)s",
+    "ck": "ck_%(table_name)s_%(constraint_name)s",
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+    "pk": "pk_%(table_name)s",
+}
+
+meta = MetaData(naming_convention=convention)

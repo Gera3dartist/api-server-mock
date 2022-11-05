@@ -1,10 +1,21 @@
-from pydantic import BaseModel, EmailStr
+import typing as t
+from pydantic import BaseModel, EmailStr, SecretStr, Field
+
 
 
 class UserUpdate(BaseModel):
-    name: str
-    email: EmailStr
+    name: t.Optional[str]
+    email: t.Optional[EmailStr]
+    password: t.Optional[SecretStr]
 
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: SecretStr
+
+
+class LoginUser(BaseModel):
+    password: SecretStr
+    email: EmailStr
 
 class User(UserUpdate):
     id: str
@@ -17,8 +28,8 @@ class ProjectUpdate(BaseModel):
 class Project(ProjectUpdate):
     id: str
 
-# TODO: define fields properly
-class Field(BaseModel):
+# TODO: define SchemaFields properly
+class SchemaField(BaseModel):
     name: str
     type: str
     default: str
@@ -32,7 +43,7 @@ class Endpoints(BaseModel):
 
 class ResourceBase(BaseModel):
     name: str
-    schema: list[Field]
+    schema_: list[SchemaField] = Field(alias='schema')
     endpoints: list[Endpoints]
     count: int
 

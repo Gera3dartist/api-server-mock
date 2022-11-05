@@ -1,0 +1,1 @@
+async def create_resource(): pass

@@ -51,7 +51,7 @@ RUN poetry install
 WORKDIR $APP_WORKDIR
 
 EXPOSE 8080
-CMD ["uvicorn", "--reload", "api_server_mock.resources:app", "--port", "8080", "--host", "0.0.0.0"]
+CMD ["uvicorn", "--reload", "api_server_mock.main:app", "--port", "8080", "--host", "0.0.0.0"]
 
 
 # `production` image used for runtime
@@ -59,4 +59,4 @@ FROM python-base as production
 ENV FASTAPI_ENV=production
 COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 WORKDIR /api_server_mock
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "api_server_mock.resources:app"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "app.main:app"]
