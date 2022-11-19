@@ -10,6 +10,7 @@ class UserUpdate(BaseModel):
 
 class UserCreate(BaseModel):
     email: EmailStr
+    name: str
     password: SecretStr
 
 

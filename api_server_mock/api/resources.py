@@ -3,7 +3,7 @@ from fastapi import APIRouter
 resource_router = APIRouter()
 
 
-@resource_router.get("/")
+@resource_router.post("/")
 async def root():
     return {"message": "ok"}
 
